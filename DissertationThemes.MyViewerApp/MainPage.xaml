@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DissertationThemes.MyViewerApp.MainPage">
+
+    <ContentPage.MenuBarItems>
+        <MenuBarItem Text="File">
+            <MenuFlyoutItem Text="Export to CSV..."
+                        Clicked="ExportCsvClicked" />
+            <MenuFlyoutItem Text="Exit"
+                        Clicked="ExitClick" />
+        </MenuBarItem>
+        <MenuBarItem Text="Help">
+            <MenuFlyoutItem Text="About"
+                        Clicked="AboutClick" />
+        </MenuBarItem>
+    </ContentPage.MenuBarItems>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackLayout Grid.Row="1" Grid.Column="0" Padding="10" Margin="5" Orientation="Horizontal" VerticalOptions="Center" Spacing="10">
+            <Label Text="Study program:" Margin="10" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Picker x:Name="StProgramComboBox" Margin="5" ItemDisplayBinding="{Binding Name}"  VerticalOptions="Center" SelectedIndexChanged="StProgramComboBox_SelectionChanged"  />
+            <Label Text="Year:" Margin="5"  VerticalOptions="Center"/>
+            <Picker x:Name="YearsComboBox" Margin="5" VerticalOptions="Center" SelectedIndexChanged="YearsComboBox_SelectionChanged"/>
+        </StackLayout>
+        
+        <ListView x:Name="ThemesListView" Margin="5" Grid.Row="2" Grid.RowSpan="3" Grid.Column="0" ItemSelected="ThemesListView_ItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="{Binding Name}" FontAttributes="Bold" LineBreakMode="WordWrap"/>
+                            <Label Grid.Row="1" Text="{Binding Supervisor}" LineBreakMode="WordWrap"/>
+                            <Label Grid.Row="2" Text="{Binding Created}" FontAttributes="Italic" VerticalOptions="End" LineBreakMode="WordWrap"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        <StackLayout Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Orientation="Vertical" Margin="10" MaximumWidthRequest="200" HorizontalOptions="StartAndExpand">
+            <Button Text="Clear Filter" Margin="5" Clicked="ClearFiltersButtonClick"/>
+            <Button x:Name="DetailsButton" Text="Show details..." Margin="5" Clicked="ShowDetailsButtonClick" IsEnabled="False"/>
+            <Button x:Name="DocxButton" Text="Generate to .docx..." Margin="5" Clicked="GenerateDocxButtonClicked" IsEnabled="False"/>
+        </StackLayout>
+
+        <StackLayout Grid.Row="3" Grid.Column="1" Orientation="Vertical" VerticalOptions="End" HorizontalOptions="Start">
+            <Label Text="Count" Margin="5"/>
+            <Label x:Name="CountLabel" Text="{Binding Source={x:Reference ThemesListView}, Path=ItemsSource.Count, Mode=TwoWay}"  Margin="5" FontAttributes="Bold"/>
+        </StackLayout>
+
+    </Grid>
+
+</ContentPage>

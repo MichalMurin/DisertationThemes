@@ -1,0 +1,85 @@
+﻿<Window x:Class="DissertationThemes.ViewerApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DissertationThemes.ViewerApp"
+        mc:Ignorable="d"
+        Title="Disertation Theme Viewer" Height="450" Width="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File" Margin="4" >
+                    <MenuItem Header="Export to CSV..."  Click="ExportCsvClicked"/>
+                    <MenuItem Header="Exit" Click="ExitClick"/>
+                </MenuItem>
+                <MenuItem Header="_Help" Margin="4">
+                    <MenuItem Header="About" Click="AboutClick"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <DockPanel Grid.Row="1" Grid.Column="0" >
+            <TextBlock Text="Study program:" Margin="5"/>
+            <ComboBox x:Name="StProgramComboBox" MinWidth="300" Margin="5"  DisplayMemberPath="Name" ItemsSource="{Binding StPrograms}" SelectionChanged="StProgramComboBox_SelectionChanged"/>
+            <TextBlock Text="Year:" Margin="5"/>
+            <ComboBox x:Name="YearsComboBox" Width="Auto" Margin="5" ItemsSource="{Binding Years}" SelectionChanged="YearsComboBox_SelectionChanged"/>            
+        </DockPanel>
+        <ListView x:Name="ThemesListView" Margin="5" Grid.Row="2" Grid.RowSpan="3" Grid.Column="0" ItemsSource="{Binding Themes}">
+            <ListView.Resources>
+                <Style TargetType="{x:Type GridViewColumnHeader}">
+                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                </Style>
+            </ListView.Resources>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Theme" Width="Auto" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Supervisor" Width="Auto" DisplayMemberBinding="{Binding Supervisor}" />
+                    <GridViewColumn Header="Full Time Study" Width="Auto" DisplayMemberBinding="{Binding IsFullTimeStudy}" />
+                    <GridViewColumn Header="External Study" Width="Auto" DisplayMemberBinding="{Binding IsExternalStudy}" />
+                    <GridViewColumn Header="Created" Width="Auto" DisplayMemberBinding="{Binding Created}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Button Content="Clear Filter" Margin="5" Padding="5" Click="ClearFiltersButtonClick"/>
+            <Button Content="Show details..." Margin="5" Padding="5" Click="ShowDetailsButtonClick">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=ThemesListView, Path=SelectedItem}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Content="Generate to .docx..." Margin="5" Padding="5" Click="GenerateDocxButtonClicked">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=ThemesListView, Path=SelectedItem}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <TextBlock Text="Count:" Margin="5"/>
+            <TextBlock Text="{Binding ItemsSource.Count, ElementName=ThemesListView}" Margin="5" FontWeight="Bold"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DissertationThemes.MyViewerApp.ThemeInfoPage"
+             Title="Disertation theme detail">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Text="Id:" FontAttributes="Bold" Margin="5" HorizontalOptions="Start" Grid.Column="0" Grid.Row="0"/>
+        <Label Text="Name:" FontAttributes="Bold" Margin="5" HorizontalOptions="Start" Grid.Column="0" Grid.Row="1"/>
+        <Label Text="Supervisor:" FontAttributes="Bold" Margin="5" HorizontalOptions="Start" Grid.Column="0" Grid.Row="2"/>
+        <Label Text="Study program:" FontAttributes="Bold" Margin="5" HorizontalOptions="Start" Grid.Column="0" Grid.Row="3"/>
+        <Label Text="Is full time study:" FontAttributes="Bold" Margin="5" HorizontalOptions="Start" Grid.Column="0" Grid.Row="4"/>
+        <Label Text="Is external study:" FontAttributes="Bold" Margin="5" HorizontalOptions="Start" Grid.Column="0" Grid.Row="5" />
+        <Label Text="Research type:" FontAttributes="Bold" Margin="5" HorizontalOptions="Start" Grid.Column="0" Grid.Row="6"/>
+        <Label Text="Description:" FontAttributes="Bold" Margin="5" HorizontalOptions="Start" Grid.Column="0" Grid.Row="7"/>
+        <Label Text="Created:" FontAttributes="Bold" Margin="5" HorizontalOptions="Start" Grid.Column="0" Grid.Row="8"/>
+
+        <!--Data-->
+        <Label Text="{Binding Theme.Id}" Margin="5" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0"/>
+        <Label Text="{Binding Theme.Name}" Margin="5" HorizontalOptions="Start" Grid.Column="1" Grid.Row="1"/>
+        <Label Text="{Binding Theme.Supervisor}" Margin="5" HorizontalOptions="Start" Grid.Column="1" Grid.Row="2"/>
+        <Label Text="{Binding StProgram.Name}" Margin="5" HorizontalOptions="Start" Grid.Column="1" Grid.Row="3"/>
+        <Label Text="{Binding Theme.IsFullTimeStudy}" Margin="5" HorizontalOptions="Start" Grid.Column="1" Grid.Row="4"/>
+        <Label Text="{Binding Theme.IsExternalStudy}" Margin="5" HorizontalOptions="Start" Grid.Column="1" Grid.Row="5"/>
+        <Label Text="{Binding Theme.ResearchType}" Margin="5" HorizontalOptions="Start" Grid.Column="1" Grid.Row="6"/>
+        <Label Text="{Binding Theme.Description}" Margin="5" HorizontalOptions="Start" Grid.Column="1" Grid.Row="7"/>
+        <Label Text="{Binding Theme.Created}" Margin="5" HorizontalOptions="Start" Grid.Column="1" Grid.Row="8"/>
+
+        <Button Text="BACK" Margin="5" Padding="30,3" HorizontalOptions="End" VerticalOptions="End" Clicked="OkButtonClick"  Grid.Column="1" Grid.Row="9"/>
+
+    </Grid>
+</ContentPage>
